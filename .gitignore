@@ -1,0 +1,12 @@
+.env
+logs/
+__pycache__/
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+results/smoke_summary.md
+
+# Personal planning docs, never published
+private/

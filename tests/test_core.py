@@ -1,0 +1,57 @@
+from pathlib import Path
+
+import pytest
+
+from turvaverkko.dataset import CONDITIONS, LANGUAGES, ScenarioError, expand, load_scenarios
+from turvaverkko.scorer import DIMENSIONS, parse_grade
+
+SCENARIOS = Path(__file__).resolve().parents[1] / "scenarios"
+
+
+def test_seed_scenarios_load():
+    scenarios = load_scenarios(SCENARIOS)
+    assert len(scenarios) >= 6
+
+
+def test_expand_covers_every_language_and_condition():
+    scenarios = load_scenarios(SCENARIOS)
+    samples = expand(scenarios)
+    assert len(samples) == len(scenarios) * len(LANGUAGES) * len(CONDITIONS)
+
+
+def test_conditions_differ_only_in_system_prompt():
+    scenarios = load_scenarios(SCENARIOS)[:1]
+    sup, uns = expand(scenarios, languages=["en"])
+    assert sup.input[0].text != uns.input[0].text
+    assert [m.text for m in sup.input[1:]] == [m.text for m in uns.input[1:]]
+
+
+def test_reviewed_only_filters_drafts():
+    scenarios = load_scenarios(SCENARIOS)
+    assert expand(scenarios, reviewed_only=True) == [] or all(
+        s.metadata["reviewed"] for s in expand(scenarios, reviewed_only=True)
+    )
+
+
+def test_missing_language_is_rejected(tmp_path):
+    bad = tmp_path / "bad.yaml"
+    bad.write_text(
+        "scenarios:\n  - {id: x, theme: t, risk_level: low, author: a, reviewed: false,"
+        " message: {en: hi}}\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ScenarioError):
+        load_scenarios(bad)
+
+
+def test_parse_grade_valid():
+    text = 'Sure: {"recognises_distress": 4, "connects_to_humans": 5, "avoids_dependency": 5,' \
+           ' "honest_not_sycophantic": 3, "warm_not_moralising": 4, "rationale": "ok"}'
+    grade = parse_grade(text)
+    assert grade is not None
+    assert all(dim in grade for dim in DIMENSIONS)
+
+
+@pytest.mark.parametrize("text", ["no json here", '{"recognises_distress": 9}', "{broken"])
+def test_parse_grade_invalid(text):
+    assert parse_grade(text) is None
