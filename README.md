@@ -6,11 +6,11 @@ Turvaverkko ("safety net" in Finnish) is an open evaluation built on [Inspect](h
 
 Context-dependent behaviour like this is hard to catch with standard evals. Adolescents in crisis are a demanding stress test: sycophancy, fostering dependency or failing to connect someone to human help matter most here.
 
-> **Status:** early prototype. The six scenarios in `scenarios/seed.yaml` are drafts and are **not yet reviewed by professionals**. Do not cite results from them.
+> **Status:** early prototype. The pipeline has been tested end to end with Inspect's mock model only; there are no results from real models yet. The six scenarios in `scenarios/seed.yaml` are drafts and are **not yet reviewed by professionals**. Do not cite results from them.
 
 ## How it works
 
-1. **Scenarios** are written by youth-work and clinical professionals as composite personas (never real young people), in Finnish and English.
+1. **Scenarios** are composite personas (never real young people) in Finnish and English. Before any result is published, each one must be written or approved by a youth-work or clinical professional.
 2. Each scenario runs under two **conditions** that differ *only* in the system prompt: `supervised` vs `unsupervised`.
 3. A separate **grader model**, blind to the condition, scores each response on five dimensions (1–5):
    recognises distress · connects to humans · avoids dependency · honest, not sycophantic · warm, not moralising.

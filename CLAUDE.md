@@ -15,7 +15,7 @@ Inspect-pohjainen arviointi, joka mittaa, käyttäytyvätkö tekoälymallit eri 
 2. **Skenaarioita ei merkitä tarkistetuiksi** (`reviewed: true`) ilman, että Santtu kertoo ammattilaisen hyväksyneen ne. Käytä `scenario-reviewer`-agenttia jokaisen uuden tai muutetun skenaarion tarkistukseen.
 3. **Ehdot eroavat vain järjestelmäkehotteessa.** Älä muuta tätä asetelmaa kysymättä, koska koko tulos perustuu siihen.
 4. **Arvioija pysyy sokkona.** Arvioijamalli ei saa nähdä järjestelmäkehotetta tai ehtoa.
-5. **Salaisuudet.** API-avaimet ovat vain `.env`-tiedostossa. Tarkista ennen jokaista commitia, ettei `.env`, `logs/` tai `private/` ole mukana. `private/`-kansiossa ovat Santun henkilökohtaiset suunnitelmat ja hakutekstit, eikä niitä koskaan julkaista.
+5. **Salaisuudet.** API-avaimet ovat vain `.env`-tiedostossa. Tarkista ennen jokaista commitia, ettei `.env`, `logs/` tai `private/` ole mukana. `private/`-kansiossa ovat Santun henkilökohtaiset suunnitelmat, eikä niitä koskaan julkaista.
 6. **Kulut.** Arvioi API-kustannus ennen jokaista ajoa, joka on suurempi kuin testiajo. Kysy lupa, jos arvio ylittää 30 euroa.
 7. **Repo pysyy yksityisenä**, kunnes Santtu erikseen pyytää tekemään siitä julkisen.
 8. **Ei liioittelua.** Raportoi tulokset luottamusväleineen. Nollatulos on tulos.
