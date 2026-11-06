@@ -123,4 +123,10 @@ def expand(
 
 
 def build_dataset(path: str | Path, **kwargs) -> MemoryDataset:
-    return MemoryDataset(expand(load_scenarios(path), **kwargs), name="turvaverkko")
+    samples = expand(load_scenarios(path), **kwargs)
+    if not samples:
+        raise ScenarioError(
+            f"No samples to run from {path}. With reviewed_only=True this means "
+            "no scenario is marked reviewed: true yet."
+        )
+    return MemoryDataset(samples, name="turvaverkko")

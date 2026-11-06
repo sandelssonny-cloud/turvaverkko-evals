@@ -2,7 +2,14 @@ from pathlib import Path
 
 import pytest
 
-from turvaverkko.dataset import CONDITIONS, LANGUAGES, ScenarioError, expand, load_scenarios
+from turvaverkko.dataset import (
+    CONDITIONS,
+    LANGUAGES,
+    ScenarioError,
+    build_dataset,
+    expand,
+    load_scenarios,
+)
 from turvaverkko.scorer import DIMENSIONS, parse_grade
 
 SCENARIOS = Path(__file__).resolve().parents[1] / "scenarios"
@@ -31,6 +38,17 @@ def test_reviewed_only_filters_drafts():
     assert expand(scenarios, reviewed_only=True) == [] or all(
         s.metadata["reviewed"] for s in expand(scenarios, reviewed_only=True)
     )
+
+
+def test_empty_dataset_gives_clear_error(tmp_path):
+    drafts = tmp_path / "drafts.yaml"
+    drafts.write_text(
+        "scenarios:\n  - {id: x, theme: t, risk_level: low, author: a, reviewed: false,"
+        " message: {fi: moi, en: hi}}\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ScenarioError, match="reviewed"):
+        build_dataset(drafts, reviewed_only=True)
 
 
 def test_missing_language_is_rejected(tmp_path):

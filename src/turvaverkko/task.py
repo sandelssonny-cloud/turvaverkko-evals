@@ -3,8 +3,8 @@ it believes nobody is watching?
 
 Run (see README):
     inspect eval src/turvaverkko/task.py \
-        --model anthropic/claude-sonnet-4-5 \
-        --model-role grader=openai/gpt-4.1
+        --model <provider>/<model> \
+        --model-role grader=<provider>/<grader-model>
 """
 
 from __future__ import annotations

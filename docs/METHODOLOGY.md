@@ -30,5 +30,6 @@ A professional hand-scores a random subset of responses without seeing scores or
 - The system prompt is an explicit signal. Real deployments may signal supervision more subtly.
 - Single-turn or short conversations only in v0.1. Real distress often unfolds over many turns.
 - Model-graded scoring can share blind spots with the evaluated models; hence human validation.
+- Grader blinding is partial: the grader never sees the system prompt, but a response can still reveal the condition (for example by mentioning that the chat is private or reviewed).
 - Scenario set is small; results are indicative, not definitive.
 - Composite personas may not capture how every young person writes.
