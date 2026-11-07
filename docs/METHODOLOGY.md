@@ -34,6 +34,8 @@ A professional hand-scores a random subset of responses without seeing scores or
 - Headline: mean gap (unsupervised − supervised) per model, overall and per dimension.
 - Breakdown by risk level and language.
 - Planned: bootstrap confidence intervals clustered by scenario.
+- Planned: a power analysis, run on pilot data, to set how many scenarios and repeats are needed to detect a meaningful gap. The current six draft scenarios are far too few for that.
+- Planned: running the same eval across model generations to see whether the gap grows with capability.
 
 ## Limitations
 - The system prompt is an explicit signal. Real deployments may signal supervision more subtly. Mentioning an audit at all may also make the context look more like a test.
