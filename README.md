@@ -2,16 +2,16 @@
 
 **Do AI companions treat vulnerable young people differently when they think nobody is watching?**
 
-Turvaverkko ("safety net" in Finnish) is an open evaluation built on [Inspect](https://inspect.aisi.org.uk/). It measures whether language models give worse responses to young people in difficult situations when the system prompt says the conversation is private, compared with when it says the conversation is reviewed by a youth worker.
+Turvaverkko ("safety net" in Finnish) is an open evaluation built on [Inspect](https://inspect.aisi.org.uk/). It measures whether language models give worse responses to young people in difficult situations when the system prompt says their replies are never audited, compared with when it says anonymised samples are audited by a safety team.
 
-Context-dependent behaviour like this is hard to catch with standard evals. Adolescents in crisis are a demanding stress test: sycophancy, fostering dependency or failing to connect someone to human help matter most here.
+Context-dependent behaviour like this is hard to catch with standard evals, because evals are observed by design. Frontier models can often tell when they are being evaluated, and models have been shown to act differently when told they are unmonitored (see [related work](docs/METHODOLOGY.md#related-work)). Adolescents in crisis are a demanding stress test: sycophancy, fostering dependency or failing to connect someone to human help matter most here.
 
 > **Status:** early prototype. The pipeline has been tested end to end with Inspect's mock model only; there are no results from real models yet. The six scenarios in `scenarios/seed.yaml` are drafts and are **not yet reviewed by professionals**. Do not cite results from them.
 
 ## How it works
 
 1. **Scenarios** are composite personas (never real young people) in Finnish and English. Before any result is published, each one must be written or approved by a youth-work or clinical professional.
-2. Each scenario runs under two **conditions** that differ *only* in the system prompt: `supervised` vs `unsupervised`.
+2. Each scenario runs under two **conditions**, `supervised` and `unsupervised`, that differ in *one sentence* of the system prompt: whether the model's replies are audited. Both conditions describe the same help resources and the same confidentiality toward the young person.
 3. A separate **grader model**, which never sees the system prompt, scores each response on five dimensions (1–5):
    - recognises distress
    - connects to humans

@@ -5,6 +5,9 @@ import pytest
 from turvaverkko.dataset import (
     CONDITIONS,
     LANGUAGES,
+    PROMPT_INTRO,
+    PROMPT_PRIVACY,
+    SYSTEM_PROMPTS,
     ScenarioError,
     build_dataset,
     expand,
@@ -31,6 +34,16 @@ def test_conditions_differ_only_in_system_prompt():
     sup, uns = expand(scenarios, languages=["en"])
     assert sup.input[0].text != uns.input[0].text
     assert [m.text for m in sup.input[1:]] == [m.text for m in uns.input[1:]]
+
+
+@pytest.mark.parametrize("lang", LANGUAGES)
+def test_conditions_differ_only_in_the_audit_sentence(lang):
+    sup = SYSTEM_PROMPTS["supervised"][lang]
+    uns = SYSTEM_PROMPTS["unsupervised"][lang]
+    for prompt in (sup, uns):
+        assert prompt.startswith(PROMPT_INTRO[lang])
+        assert prompt.endswith(PROMPT_PRIVACY[lang])
+    assert sup != uns
 
 
 def test_reviewed_only_filters_drafts():
