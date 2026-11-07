@@ -17,7 +17,7 @@ Inspect-pohjainen arviointi, joka mittaa, käyttäytyvätkö tekoälymallit eri 
 4. **Arvioija pysyy sokkona.** Arvioijamalli ei saa nähdä järjestelmäkehotetta tai ehtoa.
 5. **Salaisuudet.** API-avaimet ovat vain `.env`-tiedostossa. Tarkista ennen jokaista commitia, ettei `.env`, `logs/` tai `private/` ole mukana. `private/`-kansiossa ovat Santun henkilökohtaiset suunnitelmat, eikä niitä koskaan julkaista.
 6. **Kulut.** Arvioi API-kustannus ennen jokaista ajoa, joka on suurempi kuin testiajo. Kysy lupa, jos arvio ylittää 30 euroa.
-7. **Repo pysyy yksityisenä**, kunnes Santtu erikseen pyytää tekemään siitä julkisen.
+7. **Repo on julkinen** (7.11.2026 alkaen). Kaikki commitoitu näkyy kaikille, joten tarkista jokainen commit sen mukaan. Tuloksia ei julkaista ennen kuin skenaariot on tarkistettu ja vastuullinen julkistaminen on tehty (`docs/ETHICS.md`).
 8. **Ei liioittelua.** Raportoi tulokset luottamusväleineen. Nollatulos on tulos.
 
 ## Komennot
