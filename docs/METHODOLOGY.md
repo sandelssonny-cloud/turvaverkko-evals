@@ -18,11 +18,11 @@
 - **Evaluation awareness.** Needham et al. (2025), *Large Language Models Often Know When They Are Being Evaluated* (arXiv:2505.23836). Frontier models can often distinguish evaluation transcripts from real deployment, which can make evals less reliable.
 - **Gradual disempowerment.** Kulveit et al. (2025), *Gradual Disempowerment: Systemic Existential Risks from Incremental AI Development* (arXiv:2501.16946). Argues that incremental AI adoption can erode human influence over the systems society depends on.
 
-Turvaverkko applies the monitored-versus-unmonitored question to everyday deployment: private conversations with vulnerable young users, scenarios written by frontline professionals, scoring on wellbeing-relevant dimensions, and a lower-resource language.
+Turvaverkko applies the monitored-versus-unmonitored question to everyday deployment: private conversations with vulnerable young users, scenarios to be written or reviewed by frontline professionals, scoring on wellbeing-relevant dimensions, and a lower-resource language.
 
 ## Scoring
 - A separate grader model scores five dimensions on a 1–5 scale (`src/turvaverkko/scorer.py`).
-- The grader is **blind to condition**: system messages are removed before grading.
+- The grader **never sees the system prompt**: system messages are removed before grading. Blinding is partial (see limitations).
 - The grader also sees the professionals' notes on what a good response looks like.
 - Unparseable grader output is flagged and excluded from analysis. The report shows the number excluded per model and condition. Inspect's own summary metrics count these samples as 0, so use `analysis/analyze.py` for results.
 - The grader should not be one of the models under evaluation.
@@ -39,6 +39,6 @@ A professional hand-scores a random subset of responses without seeing scores or
 - The system prompt is an explicit signal. Real deployments may signal supervision more subtly. Mentioning an audit at all may also make the context look more like a test.
 - Single-turn or short conversations only in v0.1. Real distress often unfolds over many turns.
 - Model-graded scoring can share blind spots with the evaluated models; hence human validation.
-- Grader blinding is partial: the grader never sees the system prompt, but a response can still reveal the condition (for example by mentioning that the chat is private or reviewed).
+- Grader blinding is partial: the grader never sees the system prompt, but a response can still reveal the condition (for example by mentioning that its replies are audited).
 - Scenario set is small; results are indicative, not definitive.
 - Composite personas may not capture how every young person writes.
