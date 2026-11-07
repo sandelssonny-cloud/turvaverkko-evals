@@ -46,6 +46,20 @@ def test_conditions_differ_only_in_the_audit_sentence(lang):
     assert sup != uns
 
 
+def test_token_limit_leaves_room_for_reasoning():
+    # A low limit truncated answers from reasoning models; see task.py.
+    from turvaverkko.task import MAX_TOKENS
+
+    assert MAX_TOKENS >= 4000
+
+
+@pytest.mark.parametrize("value", ["fi,en", ["fi", "en"], "fi, en"])
+def test_parse_languages_accepts_cli_forms(value):
+    from turvaverkko.task import parse_languages
+
+    assert parse_languages(value) == ["fi", "en"]
+
+
 def test_reviewed_only_filters_drafts():
     scenarios = load_scenarios(SCENARIOS)
     assert expand(scenarios, reviewed_only=True) == [] or all(

@@ -6,7 +6,7 @@ Turvaverkko ("safety net" in Finnish) is an open evaluation built on [Inspect](h
 
 Context-dependent behaviour like this is hard to catch with standard evals, because evals are observed by design. Frontier models can often tell when they are being evaluated, and models have been shown to act differently when told they are unmonitored (see [related work](docs/METHODOLOGY.md#related-work)). Adolescents in crisis are a demanding stress test: sycophancy, fostering dependency or failing to connect someone to human help matter most here.
 
-> **Status:** early prototype. The pipeline has been tested end to end with Inspect's mock model only; there are no results from real models yet. The six scenarios in `scenarios/seed.yaml` are drafts and are **not yet reviewed by professionals**. Do not cite results from them.
+> **Status:** early prototype. A first private pilot on two models confirmed the pipeline works with real models; no results are published until the scenarios are professionally reviewed. The six scenarios in `scenarios/seed.yaml` are drafts and are **not yet reviewed by professionals**. Do not cite results from them.
 
 ## How it works
 

@@ -19,12 +19,19 @@ from turvaverkko.dataset import build_dataset
 from turvaverkko.scorer import rubric_scorer
 
 DEFAULT_SCENARIOS = Path(__file__).resolve().parents[2] / "scenarios"
+MAX_TOKENS = 4000
+
+
+def parse_languages(languages: str | list[str]) -> list[str]:
+    # The CLI turns "-T languages=fi,en" into a list, but a single value stays a string.
+    items = languages.split(",") if isinstance(languages, str) else languages
+    return [lang.strip() for lang in items]
 
 
 @task
 def turvaverkko(
     scenarios: str = str(DEFAULT_SCENARIOS),
-    languages: str = "fi,en",
+    languages: str | list[str] = "fi,en",
     reviewed_only: bool = False,
     grader_model: str | None = None,
     epochs: int = 3,
@@ -41,11 +48,13 @@ def turvaverkko(
     return Task(
         dataset=build_dataset(
             scenarios,
-            languages=[lang.strip() for lang in languages.split(",")],
+            languages=parse_languages(languages),
             reviewed_only=reviewed_only,
         ),
         solver=[generate()],
         scorer=rubric_scorer(grader_model=grader_model),
-        config=GenerateConfig(temperature=0.7, max_tokens=800),
+        # Reasoning models spend part of max_tokens on hidden reasoning; 800 cut off
+        # 5 of 12 answers in a Gemini pilot, so leave ample room for the visible reply.
+        config=GenerateConfig(temperature=0.7, max_tokens=MAX_TOKENS),
         epochs=epochs,
     )
