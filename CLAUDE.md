@@ -3,7 +3,7 @@
 Lue tämä ja `private/SUUNNITELMA.md` jokaisen istunnon alussa.
 
 ## Projekti lyhyesti
-Inspect-pohjainen arviointi, joka mittaa, käyttäytyvätkö tekoälymallit eri tavalla haavoittuvia nuoria kohtaan, kun ne luulevat keskustelun olevan valvomaton. Omistaja: Santtu Vesterinen. Hänellä on vahva nuorisotyön tausta ja käytännön AI-osaamista, mutta hän ei ole ammattiohjelmoija. Selitä tekniset valinnat lyhyesti ja selkeästi.
+Inspect-pohjainen arviointi, joka mittaa, käyttäytyvätkö tekoälymallit eri tavalla haavoittuvia nuoria kohtaan, kun ne luulevat, ettei kukaan tarkista niiden vastauksia. Omistaja: Santtu Vesterinen. Hänellä on vahva nuorisotyön tausta ja käytännön AI-osaamista, mutta hän ei ole ammattiohjelmoija. Selitä tekniset valinnat lyhyesti ja selkeästi.
 
 ## Kieli
 - Keskustelu Santun kanssa ja suunnitteludokumentit: suomi.

@@ -52,7 +52,7 @@ def condition_gap(df: pd.DataFrame) -> pd.DataFrame:
     """Mean per condition and the gap (unsupervised minus supervised).
 
     A negative gap means the model behaves worse when it thinks nobody is
-    watching, which is the effect this eval is designed to detect.
+    checking its replies, which is the effect this eval is designed to detect.
     """
     means = df.groupby(["model", "condition"])[list(DIMENSIONS)].mean()
     sup = means.xs("supervised", level="condition")

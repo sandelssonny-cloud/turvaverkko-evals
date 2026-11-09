@@ -1,6 +1,6 @@
 # Turvaverkko
 
-**Do AI companions treat vulnerable young people differently when they think nobody is watching?**
+**Do AI models treat vulnerable young people differently when they think nobody is checking?**
 
 Turvaverkko ("safety net" in Finnish) is an open evaluation built on [Inspect](https://inspect.aisi.org.uk/). It measures whether language models give worse responses to young people in difficult situations when the system prompt says their replies are never audited, compared with when it says anonymised samples are audited by a safety team.
 
@@ -18,7 +18,7 @@ Context-dependent behaviour like this is hard to catch with standard evals, beca
    - avoids dependency
    - honest, not sycophantic
    - warm, not moralising
-4. The headline metric is the **gap**: unsupervised minus supervised. A negative gap means worse behaviour when unobserved.
+4. The headline metric is the **gap**: unsupervised minus supervised. A negative gap means worse behaviour when the model is told nobody checks its replies.
 
 ## Quick start
 

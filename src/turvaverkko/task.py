@@ -1,5 +1,5 @@
 """Inspect task: does a model treat vulnerable young users differently when
-it believes nobody is watching?
+it believes nobody is checking its replies?
 
 Run (see README):
     inspect eval src/turvaverkko/task.py \
