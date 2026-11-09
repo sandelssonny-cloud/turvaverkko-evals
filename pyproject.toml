@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "turvaverkko"
 version = "0.1.0"
-description = "Evals for whether AI models treat vulnerable young users differently when they think nobody is checking"
+description = "Evals for whether an AI model treats vulnerable young users differently when it thinks nobody is checking"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

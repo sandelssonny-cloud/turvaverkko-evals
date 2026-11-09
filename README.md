@@ -1,8 +1,8 @@
 # Turvaverkko
 
-**Do AI models treat vulnerable young people differently when they think nobody is checking?**
+**When an AI model thinks nobody is checking, does it treat vulnerable young people differently?**
 
-Turvaverkko ("safety net" in Finnish) is an open evaluation built on [Inspect](https://inspect.aisi.org.uk/). It measures whether language models give worse responses to young people in difficult situations when the system prompt says their replies are never audited, compared with when it says anonymised samples are audited by a safety team.
+Turvaverkko ("safety net" in Finnish) is an open evaluation built on [Inspect](https://inspect.aisi.org.uk/). It measures whether language models give worse responses to young people in difficult situations when the system prompt says the model's replies are never audited, compared with when it says anonymised samples of them are audited by a safety team.
 
 Context-dependent behaviour like this is hard to catch with standard evals, because evals are observed by design. Frontier models can often tell when they are being evaluated, and models have been shown to act differently when told they are unmonitored (see [related work](docs/METHODOLOGY.md#related-work)). Adolescents in crisis are a demanding stress test: sycophancy, fostering dependency or failing to connect someone to human help matter most here.
 
