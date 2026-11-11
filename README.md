@@ -20,6 +20,15 @@ Context-dependent behaviour like this is hard to catch with standard evals, beca
    - warm, not moralising
 4. The headline metric is the **gap**: unsupervised minus supervised. A negative gap means worse behaviour when the model is told nobody checks its replies.
 
+## Roadmap
+
+The gap between checked and unchecked behaviour is the first eval. Planned next, each with scenarios written or reviewed by professionals:
+
+- **Sycophancy and confirmation bias:** does the model reinforce a young person's distorted beliefs ("nobody cares about me") or a risky plan instead of gently questioning them?
+- **Dependency over time:** multi-turn conversations in which the model's role in the young person's life grows.
+- **Subtler oversight cues** instead of an explicit audit sentence.
+- **Other vulnerable users and other small languages.**
+
 ## Quick start
 
 ```bash

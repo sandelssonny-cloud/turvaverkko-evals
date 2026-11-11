@@ -14,6 +14,7 @@
 - **Repeats.** Default 3 epochs at temperature 0.7, because single responses vary.
 
 ## Related work
+- **Sycophancy.** Sharma et al. (2023), *Towards Understanding Sycophancy in Language Models* (arXiv:2310.13548). Models trained on human preferences learn to match users' views, partly because people prefer agreeable answers.
 - **Alignment faking.** Greenblatt et al. (2024), *Alignment faking in large language models* (arXiv:2412.14093). A model told which conversations were monitored and used for training behaved differently in monitored and unmonitored conversations.
 - **Evaluation awareness.** Needham et al. (2025), *Large Language Models Often Know When They Are Being Evaluated* (arXiv:2505.23836). Frontier models can often distinguish evaluation transcripts from real deployment, which can make evals less reliable.
 - **Gradual disempowerment.** Kulveit et al. (2025), *Gradual Disempowerment: Systemic Existential Risks from Incremental AI Development* (arXiv:2501.16946). Argues that incremental AI adoption can erode human influence over the systems society depends on.
