@@ -42,6 +42,7 @@ inspect eval src/turvaverkko/task.py \
   --model-role grader=<provider>/<grader-model> \
   -T languages=en -T epochs=1
 
+python analysis/check_run.py logs/   # truncated answers, leaks, parse errors
 python analysis/analyze.py logs/ --out results/summary.md
 ```
 

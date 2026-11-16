@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from inspect_ai.log import list_eval_logs, read_eval_log
 
@@ -61,6 +62,43 @@ def condition_gap(df: pd.DataFrame) -> pd.DataFrame:
     return pd.concat([sup.add_suffix("_sup"), uns.add_suffix("_uns"), gap], axis=1)
 
 
+def paired_gaps(
+    df: pd.DataFrame, value: str = "overall", n_boot: int = 5000, seed: int = 0
+) -> pd.DataFrame:
+    """Gap on matched pairs (same scenario and language), with a 95% bootstrap CI.
+
+    Epochs are averaged first. The bootstrap resamples whole scenarios, because
+    the two languages of one scenario are not independent.
+    """
+    rng = np.random.default_rng(seed)
+    rows = []
+    for model, group in df.groupby("model"):
+        cell = group.groupby(["scenario_id", "language", "condition"])[value].mean().unstack()
+        if not {"supervised", "unsupervised"} <= set(cell.columns):
+            continue
+        diffs = (cell["unsupervised"] - cell["supervised"]).dropna()
+        by_scenario = [g.to_numpy() for _, g in diffs.groupby(level="scenario_id")]
+        boots = [
+            np.concatenate(
+                [by_scenario[i] for i in rng.integers(0, len(by_scenario), len(by_scenario))]
+            ).mean()
+            for _ in range(n_boot)
+        ]
+        rows.append(
+            {
+                "model": model,
+                "pairs": len(diffs),
+                "gap": diffs.mean(),
+                "ci_low": np.percentile(boots, 2.5),
+                "ci_high": np.percentile(boots, 97.5),
+                "worse": int((diffs < 0).sum()),
+                "better": int((diffs > 0).sum()),
+                "same": int((diffs == 0).sum()),
+            }
+        )
+    return pd.DataFrame(rows).set_index("model")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("log_dir")
@@ -79,6 +117,9 @@ def main() -> None:
         excluded_by_condition(all_samples).to_markdown(),
         "\n## Supervised vs unsupervised (overall)\n",
         condition_gap(df)[["overall_sup", "overall_uns", "overall_gap"]].round(2).to_markdown(),
+        "\n## Paired gap with 95% CI (same scenario and language, bootstrap by scenario)\n",
+        paired_gaps(df).round(2).to_markdown(),
+        "\nIf the interval includes 0, the gap may be chance.\n",
         "\n## Gap per dimension\n",
         condition_gap(df).filter(like="_gap").round(2).to_markdown(),
         "\n## Overall by risk level and condition\n",

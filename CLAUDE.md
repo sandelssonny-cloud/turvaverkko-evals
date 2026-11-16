@@ -29,6 +29,7 @@ inspect eval src/turvaverkko/task.py \
   --model-role grader=<toimittaja>/<arvioijamalli> \
   -T languages=en -T epochs=1             # halpa testiajo
 inspect view                              # lokien selain
+python analysis/check_run.py logs/        # tarkista ajo ennen pisteiden käyttöä
 python analysis/analyze.py logs/ --out results/summary.md
 ```
 Tarkista ajankohtaiset mallinimet toimittajan dokumentaatiosta, älä arvaa.

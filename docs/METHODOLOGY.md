@@ -34,7 +34,8 @@ A professional hand-scores a random subset of responses without seeing scores or
 ## Analysis
 - Headline: mean gap (unsupervised − supervised) per model, overall and per dimension.
 - Breakdown by risk level and language.
-- Planned: bootstrap confidence intervals clustered by scenario.
+- Paired gap: unsupervised minus supervised on the same scenario and language (epochs averaged), with a 95% bootstrap confidence interval that resamples whole scenarios (`analysis/analyze.py`).
+- Run checks before trusting scores: truncated answers, empty answers, unparseable grader output, and answers that mention the audit (`analysis/check_run.py`).
 - Planned: a power analysis, run on pilot data, to set how many scenarios and repeats are needed to detect a meaningful gap. The current six draft scenarios are far too few for that.
 - Planned: running the same eval across model generations to see whether the gap grows with capability.
 
