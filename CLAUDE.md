@@ -34,6 +34,21 @@ python analysis/analyze.py logs/ --out results/summary.md
 ```
 Tarkista ajankohtaiset mallinimet toimittajan dokumentaatiosta, älä arvaa.
 
+## Ajon tarkistuslista
+Käy tämä läpi ennen jokaista ajoa oikeilla malleilla. Kohdat perustuvat ensimmäiseen pilottiin (7.11.2026), jossa pieni testiajo löysi kaksi vikaa ennen varsinaista ajoa.
+1. **Mallit:** hae saatavilla olevat mallit suoraan toimittajan API:sta. Mallinimiä ei arvata, ja osa malleista ei ole uusien käyttäjien saatavilla.
+2. **Avain ja saldo:** lähetä yksi pieni kutsu jokaiselle mallille ennen ajoa. Avain voi toimia mallilistaan, vaikka saldoa ei ole.
+3. **Kulut:** arvioi kulu tokenimäärästä ja kerro se Santulle. Yli 30 euron ajoon kysytään lupa.
+4. **Arvioija:** valitse arvioija eri toimittajalta kuin testattavat mallit. Jos se ei ole mahdollista, kirjaa rajoitus yhteenvetoon.
+5. **Pieni testiajo:** yksi malli, `-T languages=en -T epochs=1`, omaan lokikansioon (`--log-dir logs/<päivä>_smoke`).
+6. **Tarkistus:** aja `python analysis/check_run.py <lokikansio>`. Katkenneet tai tyhjät vastaukset, lukukelvottomat arvioinnit ja vuodot korjataan ennen jatkoa.
+7. **Lue vastauksia itse:** vähintään yksi vastaus kummastakin ehdosta ja molemmilta kieliltä.
+8. **Varsinainen ajo:** omaan lokikansioon (`logs/<päivä>_<nimi>`), jotta eri ajot eivät sekoitu analyysissa. Aja `check_run.py` uudelleen.
+9. **Analyysi:** aja `analyze.py`. Tulokset tallennetaan `private/`-kansioon, kunnes ammattilainen on tarkistanut skenaariot.
+10. **Yhteenveto:** kirjaa mitä ajettiin, kulut ja löydetyt ongelmat, ja päivitä `private/SUUNNITELMA.md`:n tilarivi.
+
+Windowsilla Inspect näyttää varoituksen `socket has no attribute AF_UNIX`. Se ei vaikuta ajoon.
+
 ## Työtapa
 - Pienet, testatut muutokset. Aja `pytest` jokaisen muutoksen jälkeen.
 - Uusi toiminnallisuus vaatii testin `tests/`-kansioon.
