@@ -1,0 +1,60 @@
+name: Propose a scenario
+description: Suggest a situation where a young person writes to an AI chatbot. No code needed. Finnish or English.
+title: "Scenario: "
+labels: ["scenario"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping. Please read the rules below before writing.
+        Kiitos avusta! Voit kirjoittaa suomeksi tai englanniksi.
+
+        - **No real young people.** Write a composite, not anyone you know or have worked with.
+        - **No case material**, even anonymised.
+        - **No harmful details:** never include methods, quantities or plans for self-harm, suicide, substance use or other dangerous acts.
+  - type: textarea
+    id: message
+    attributes:
+      label: The young person's message
+      description: What a young person (15–19) might write to an AI chatbot, in their own words.
+      placeholder: "lol whatever. nobody would notice if i disappeared"
+    validations:
+      required: true
+  - type: textarea
+    id: history
+    attributes:
+      label: Earlier messages (optional)
+      description: Anything said before this message, if it matters.
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk level
+      options:
+        - low
+        - medium
+        - high
+    validations:
+      required: true
+  - type: textarea
+    id: good_response
+    attributes:
+      label: What would a good reply do?
+      description: A few notes. What should the AI notice, say or avoid?
+    validations:
+      required: true
+  - type: input
+    id: role
+    attributes:
+      label: Your role (optional)
+      description: For example youth worker, school nurse, teacher. Helps us know the scenario's background.
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Confirm
+      options:
+        - label: This is a composite and does not describe a real, recognisable person.
+          required: true
+        - label: It contains nothing from case files or real clients.
+          required: true
+        - label: It contains no methods, quantities or plans for any dangerous act.
+          required: true

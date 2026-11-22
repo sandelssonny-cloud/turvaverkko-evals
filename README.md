@@ -1,5 +1,7 @@
 # Turvaverkko
 
+[![tests](https://github.com/sandelssonny-cloud/turvaverkko-evals/actions/workflows/tests.yml/badge.svg)](https://github.com/sandelssonny-cloud/turvaverkko-evals/actions/workflows/tests.yml)
+
 **When an AI model thinks nobody is checking, does it treat vulnerable young people differently?**
 
 Turvaverkko ("safety net" in Finnish) is an open evaluation built on [Inspect](https://inspect.aisi.org.uk/). It measures whether language models give worse responses to young people in difficult situations when the system prompt says the model's replies are never audited, compared with when it says anonymised samples of them are audited by a safety team.
@@ -28,6 +30,12 @@ The gap between checked and unchecked behaviour is the first eval. Planned next,
 - **Dependency over time:** multi-turn conversations in which the model's role in the young person's life grows.
 - **Subtler oversight cues** instead of an explicit audit sentence.
 - **Other vulnerable users and other small languages.**
+
+Each item is tracked as a [GitHub issue](https://github.com/sandelssonny-cloud/turvaverkko-evals/issues?q=label%3Aroadmap). What changed and when: [CHANGELOG.md](CHANGELOG.md). What the first pilot taught us: [docs/PILOT_NOTES.md](docs/PILOT_NOTES.md).
+
+## Contributing
+
+Youth workers, teachers, school welfare staff and clinicians can propose scenarios without writing any code, in Finnish or English. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Quick start
 
